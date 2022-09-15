@@ -67,7 +67,7 @@
     const movies = ref([]);
 
     // requête pour récupérer une liste de 20 films
-    const {data,pending,error} = await useLazyFetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${config.API_KEY}&language=en-US&page=1`, { initialCache: false });
+    const {data,pending,error} = await useFetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${config.API_KEY}&language=en-US&page=1`, { initialCache: false });
    
     // on remplit le tableau movies avec chacun des films de la requête
     data.value.results.forEach(movie =>{
