@@ -9,10 +9,11 @@
         <!-- input de recherche -->
         <search-input v-on:search-movie="searchMovies($event) "/>
 
+
         <!-- la grille de cartes affichant des films par défaut -->
-        <movie-container v-if="inputSearch ===''">   
+        <movie-container v-if ="inputSearch ===''">   
             <movie-cart 
-                :movies = "movies"
+                :movies = "data.results"
             >
             </movie-cart>
         </movie-container>
@@ -32,7 +33,6 @@
 </template>
 
 <script setup>
-
 
     // métadonnées pour le référencement
     useHead({
@@ -67,13 +67,13 @@
     const movies = ref([]);
 
     // requête pour récupérer une liste de 20 films
-    const {data,pending,error} = await useFetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${config.API_KEY}&language=en-US&page=1`, { initialCache: false });
+    const {data,pending,error} = await useLazyFetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${config.API_KEY}&language=en-US&page=1`, { initialCache: false });
    
     // on remplit le tableau movies avec chacun des films de la requête
-    data.value.results.forEach(movie =>{
+    //  data.value.results.forEach(movie =>{
 
-         movies.value.push(movie)
-    })
+    //      movies.value.push(movie)
+    // })
 
 
     // méthode pour récupérer les données envoyé par le composant enfant
